@@ -10,14 +10,19 @@
 int main()
 {
     IMateriaSource *src = new MateriaSource();
-    src->learnMateria(new Ice());
-    src->learnMateria(new Cure());
+    AMateria *iceTemplate = new Ice();
+    AMateria *cureTemplate = new Cure();
+    src->learnMateria(iceTemplate);
+    src->learnMateria(cureTemplate);
+    delete iceTemplate;  // learnMateria clones, so we delete originals
+    delete cureTemplate;
 
     ICharacter *me = new Character("me");
 
     AMateria *tmp;
     tmp = src->createMateria("ice");
     me->equip(tmp);
+    AMateria *iceMateria = tmp;  // Save reference to ice materia
     tmp = src->createMateria("cure");
     me->equip(tmp);
 
@@ -28,6 +33,7 @@ int main()
 
     me->unequip(0);
     me->use(0, *bob);
+    delete iceMateria;  // Clean up unequipped materia
 
     Character *alice = new Character("alice");
     alice->equip(src->createMateria("ice"));
