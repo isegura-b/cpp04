@@ -1,13 +1,16 @@
 #include "inc/MateriaSource.hpp"
+#include <iostream>
 
 MateriaSource::MateriaSource()
 {
+    std::cout << "MateriaSource created" << std::endl;
     for (int i = 0; i < 4; ++i)
         _templates[i] = 0;
 }
 
 MateriaSource::MateriaSource(MateriaSource const &other)
 {
+    std::cout << "MateriaSource copied" << std::endl;
     for (int i = 0; i < 4; ++i)
         _templates[i] = 0;
     _copyTemplates(other);
@@ -15,6 +18,7 @@ MateriaSource::MateriaSource(MateriaSource const &other)
 
 MateriaSource::~MateriaSource()
 {
+    std::cout << "MateriaSource destroyed" << std::endl;
     _clearTemplates();
 }
 
@@ -36,7 +40,8 @@ void MateriaSource::learnMateria(AMateria *m)
     {
         if (_templates[i] == 0)
         {
-            _templates[i] = m->clone();
+            _templates[i] = m;
+            std::cout << "MateriaSource learned " << m->getType() << std::endl;
             return;
         }
     }
@@ -47,7 +52,10 @@ AMateria *MateriaSource::createMateria(std::string const &type)
     for (int i = 0; i < 4; ++i)
     {
         if (_templates[i] && _templates[i]->getType() == type)
+        {
+            std::cout << "MateriaSource created " << type << " materia" << std::endl;
             return _templates[i]->clone();
+        }
     }
     return 0;
 }

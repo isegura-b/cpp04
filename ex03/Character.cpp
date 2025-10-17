@@ -1,13 +1,16 @@
 #include "inc/Character.hpp"
+#include <iostream>
 
 Character::Character(std::string const &name) : _name(name)
 {
+    std::cout << "Character " << _name << " created" << std::endl;
     for (int i = 0; i < 4; ++i)
         _inventory[i] = 0;
 }
 
 Character::Character(Character const &other) : _name(other._name)
 {
+    std::cout << "Character " << _name << " copied" << std::endl;
     for (int i = 0; i < 4; ++i)
         _inventory[i] = 0;
     _copyInventory(other);
@@ -15,6 +18,7 @@ Character::Character(Character const &other) : _name(other._name)
 
 Character::~Character()
 {
+    std::cout << "Character " << _name << " destroyed" << std::endl;
     _clearInventory();
 }
 
@@ -40,6 +44,7 @@ void Character::equip(AMateria *m)
         if (_inventory[i] == 0)
         {
             _inventory[i] = m;
+            std::cout << _name << " equipped " << m->getType() << " in slot " << i << std::endl;
             return;
         }
     }
@@ -49,6 +54,8 @@ void Character::unequip(int idx)
 {
     if (idx < 0 || idx >= 4)
         return;
+    if (_inventory[idx])
+        std::cout << _name << " unequipped " << _inventory[idx]->getType() << " from slot " << idx << std::endl;
     _inventory[idx] = 0; // do not delete, per spec
 }
 

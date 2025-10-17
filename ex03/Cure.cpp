@@ -2,11 +2,20 @@
 #include "inc/Cure.hpp"
 #include "inc/ICharacter.hpp"
 
-Cure::Cure() : AMateria("cure") {}
+Cure::Cure() : AMateria("cure")
+{
+    std::cout << "Cure materia created" << std::endl;
+}
 
-Cure::Cure(Cure const &other) : AMateria(other) {}
+Cure::Cure(Cure const &other) : AMateria(other)
+{
+    std::cout << "Cure materia copied" << std::endl;
+}
 
-Cure::~Cure() {}
+Cure::~Cure()
+{
+    std::cout << "Cure materia destroyed" << std::endl;
+}
 
 Cure &Cure::operator=(Cure const &other)
 {

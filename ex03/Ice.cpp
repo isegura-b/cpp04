@@ -2,11 +2,20 @@
 #include "inc/Ice.hpp"
 #include "inc/ICharacter.hpp"
 
-Ice::Ice() : AMateria("ice") {}
+Ice::Ice() : AMateria("ice")
+{
+    std::cout << "Ice materia created" << std::endl;
+}
 
-Ice::Ice(Ice const &other) : AMateria(other) {}
+Ice::Ice(Ice const &other) : AMateria(other)
+{
+    std::cout << "Ice materia copied" << std::endl;
+}
 
-Ice::~Ice() {}
+Ice::~Ice()
+{
+    std::cout << "Ice materia destroyed" << std::endl;
+}
 
 Ice &Ice::operator=(Ice const &other)
 {
